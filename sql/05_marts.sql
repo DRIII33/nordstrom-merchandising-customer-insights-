@@ -1,5 +1,6 @@
 -- Grain: month x channel x category. Ratios are stored for convenience but the dashboard
--- recomputes them from summed numerators and denominators (see section 8).
+-- recomputes them from summed numerators and denominators
+-- Mart Category Performance
 CREATE OR REPLACE TABLE `driiiportfolio.merchandising_insights.mart_category_performance` AS
 WITH sales AS (
   SELECT
@@ -34,8 +35,7 @@ LEFT JOIN `driiiportfolio.merchandising_insights.raw_inventory_monthly` i
  AND s.sales_channel = i.sales_channel
  AND s.merchandise_category = i.merchandise_category;
 
--- Naive pre/post event view. It ignores seasonality on purpose: compare it with the
--- difference-in-differences results in analysis_did_by_event to see the bias.
+-- Naive pre/post event performance
 CREATE OR REPLACE TABLE `driiiportfolio.merchandising_insights.mart_event_performance` AS
 WITH daily AS (
   SELECT transaction_date, sales_channel, COUNT(*) AS orders,
@@ -54,7 +54,7 @@ event_days AS (
        UNNEST(GENERATE_DATE_ARRAY(start_date, end_date)) AS day
 ),
 gap_days AS (
-  SELECT DISTINCT transaction_date FROM `driiiportfolio.merchandising_insights.dq_channel_day_gaps`
+  SELECT DISTINCT transaction_date FROM `driiiportfolio.merchandising_insights.dq_channel_day_gaps` 
 ),
 dense AS (
   SELECT
@@ -90,8 +90,7 @@ SELECT
   SAFE_DIVIDE(event_gross_margin_per_day, pre_gross_margin_per_day) - 1   AS naive_margin_lift
 FROM agg;
 
--- Composite Category Health Index (0 to 100) per format x category.
--- Weights: GMROI 35%, return-adjusted margin % 25%, 30-day repeat rate 20%, low promo dependence 20%.
+-- Composite Category Health Index
 CREATE OR REPLACE TABLE `driiiportfolio.merchandising_insights.mart_category_health` AS
 WITH perf AS (
   SELECT
@@ -122,7 +121,7 @@ SELECT
 FROM perf p
 JOIN rep r ON p.box_format = r.box_format AND p.merchandise_category = r.merchandise_category;
 
--- Revenue and margin carried by each rule-based RFM segment.
+-- RFM Segment Summary
 CREATE OR REPLACE TABLE `driiiportfolio.merchandising_insights.mart_rfm_segment_summary` AS
 SELECT
   rfm_segment,
@@ -135,7 +134,7 @@ SELECT
 FROM `driiiportfolio.merchandising_insights.customer_rfm`
 GROUP BY rfm_segment;
 
--- Brand partner scorecard: grain brand x box format.
+-- Brand Performance Scorecard
 CREATE OR REPLACE TABLE `driiiportfolio.merchandising_insights.mart_brand_performance` AS
 SELECT
   b.brand_id, b.brand_name, b.price_tier, b.merchandise_category, f.box_format,
