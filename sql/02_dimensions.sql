@@ -6,7 +6,6 @@ CREATE OR REPLACE TABLE `driiiportfolio.merchandising_insights.dim_customer` AS
 SELECT customer_id, signup_date, home_channel, loyalty_tier
 FROM `driiiportfolio.merchandising_insights.raw_customers`;
 
--- One row per event x channel. Events never overlap within a channel (tested in 06).
 CREATE OR REPLACE TABLE `driiiportfolio.merchandising_insights.dim_promo_event` AS
 SELECT event_id, event_name, start_date, end_date, sales_channel,
        DATE_DIFF(end_date, start_date, DAY) + 1 AS event_days,
