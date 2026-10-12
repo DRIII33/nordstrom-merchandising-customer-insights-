@@ -50,7 +50,7 @@ SELECT *
 FROM `driiiportfolio.merchandising_insights.stg_all`
 WHERE reject_reason IS NOT NULL;
 
--- Reconciliation: every raw row must be accounted for. unexplained_difference must be 0.
+-- Reconciliation: every raw row must be accounted for.
 CREATE OR REPLACE VIEW `driiiportfolio.merchandising_insights.dq_reconciliation` AS
 WITH c AS (
   SELECT
@@ -63,7 +63,7 @@ SELECT raw_rows, raw_rows - deduped_rows AS duplicates_removed, rejected_rows, s
        raw_rows - (raw_rows - deduped_rows) - rejected_rows - staged_rows AS unexplained_difference
 FROM c;
 
--- Telemetry completeness: channel-days with no orders at all.
+-- Telemetry completeness view
 CREATE OR REPLACE VIEW `driiiportfolio.merchandising_insights.dq_channel_day_gaps` AS
 WITH grid AS (
   SELECT d AS transaction_date, ch AS sales_channel
