@@ -134,3 +134,18 @@ SELECT
   SUM(observed_gross_margin_ltv)                    AS gross_margin_after_returns
 FROM `driiiportfolio.merchandising_insights.customer_rfm`
 GROUP BY rfm_segment;
+
+-- Brand partner scorecard: grain brand x box format.
+CREATE OR REPLACE TABLE `driiiportfolio.merchandising_insights.mart_brand_performance` AS
+SELECT
+  b.brand_id, b.brand_name, b.price_tier, b.merchandise_category, f.box_format,
+  COUNT(*)                                                       AS transaction_count,
+  SUM(f.net_revenue)                                             AS net_revenue,
+  SUM(f.gross_margin)                                            AS gross_margin,
+  SAFE_DIVIDE(SUM(f.gross_margin), SUM(f.net_revenue))           AS gross_margin_pct,
+  SAFE_DIVIDE(SUM(IF(f.is_promotional = 1, f.net_revenue, 0)), SUM(f.net_revenue)) AS promo_revenue_share,
+  SAFE_DIVIDE(SUM(f.is_returned), COUNT(*))                      AS return_rate,
+  SAFE_DIVIDE(SUM(f.return_adjusted_gross_margin), SUM(f.net_revenue)) AS return_adjusted_margin_pct
+FROM `driiiportfolio.merchandising_insights.fct_transactions` f
+JOIN `driiiportfolio.merchandising_insights.dim_brand` b ON f.brand_id = b.brand_id
+GROUP BY 1, 2, 3, 4, 5;
