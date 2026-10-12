@@ -1,11 +1,11 @@
-CREATE OR REPLACE TABLE `driiiportfolio.merchandising_insights.fct_transactions`
-PARTITION BY transaction_date
+-- Table recreated as a clean standard table to completely bypass BigQuery Sandbox partition constraints.
+CREATE OR REPLACE TABLE `driiiportfolio.merchandising_insights.fct_transactions` 
 CLUSTER BY sales_channel, merchandise_category AS
 WITH base AS (
   SELECT
     t.transaction_id,
     t.transaction_date,
-    DATE_TRUNC(t.transaction_date, MONTH)                                   AS month_start,
+    DATE_TRUNC(t.transaction_date, MONTH)                                                 AS month_start,
     t.customer_id,
     t.sales_channel,
     IF(t.sales_channel IN ('Rack Stores', 'NordstromRack.com'), 'Off-price', 'Full-line') AS box_format,
@@ -15,16 +15,16 @@ WITH base AS (
     b.price_tier,
     t.units_sold,
     t.unit_price,
-    IF(t.discount_percentage > 0, 1, 0)                                      AS is_promotional,
+    IF(t.discount_percentage > 0, 1, 0)                                                  AS is_promotional,
     t.discount_percentage,
     t.gross_revenue,
     t.net_revenue,
-    t.gross_revenue - t.net_revenue                                          AS markdown_dollars,
+    t.gross_revenue - t.net_revenue                                                      AS markdown_dollars,
     t.cost_of_goods_sold,
     t.gross_margin,
     t.is_returned,
     t.returned_net_revenue,
-    IF(t.is_returned = 1, 0, t.gross_margin)                                 AS return_adjusted_gross_margin,
+    IF(t.is_returned = 1, 0, t.gross_margin)                                             AS return_adjusted_gross_margin,
     e.event_id,
     e.event_name
   FROM `driiiportfolio.merchandising_insights.stg_transactions` t
