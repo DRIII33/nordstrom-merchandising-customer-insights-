@@ -47,4 +47,4 @@ WITH checks AS (
   SELECT 'telemetry_gap_days_detected', '2', CAST(COUNT(*) AS STRING), COUNT(*) = 2
   FROM `driiiportfolio.merchandising_insights.dq_channel_day_gaps`
 )
-SELECT * FROM checks ORDER BY passed, test_name;
+SELECT * FROM checks ORDER BY passed, test_name; 
