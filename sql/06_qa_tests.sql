@@ -1,3 +1,6 @@
+-- Query has been Updated - This query is saved for version control, however, it has been updated 
+-- and is now sql/07_qa_mart_freshness.sql
+
 WITH checks AS (
   SELECT 'reconciliation_unexplained_difference' AS test_name, '0' AS expected,
          CAST(unexplained_difference AS STRING) AS actual, unexplained_difference = 0 AS passed
