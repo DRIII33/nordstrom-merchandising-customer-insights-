@@ -1,0 +1,14 @@
+# Generated data and results (rebuild with the scripts)
+data/*.csv
+data/*.json
+results/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Secrets
+.env
+*.json.key
+service-account*.json
