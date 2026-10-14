@@ -1,3 +1,5 @@
+-- Naive vs difference-in-differences lift, one row per event and effect group.
+-- The Nordstrom.com (cannibalization) rows have no naive value: no promotion is defined for Nordstrom.com in those events.
 CREATE OR REPLACE VIEW `driiiportfolio.merchandising_insights.vw_event_naive_vs_did` AS
 WITH naive AS (
   SELECT
