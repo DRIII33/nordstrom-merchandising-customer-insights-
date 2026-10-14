@@ -2,7 +2,7 @@
 
 **Which promotions create margin, which only move sales between channels, and which customers respond to them?**
 
-Project AURA is an end-to-end analytics build for a four-channel fashion retailer: Nordstrom Stores, Nordstrom.com, Rack Stores and NordstromRack.com. It runs from raw data through audited SQL models and statistical testing to a five-page executive dashboard. All data is synthetic (see [Project_Disclaimer.md](Project_Disclaimer.md)).
+Project AURA is an end-to-end analytics build for a four-channel fashion retailer: Nordstrom Stores, Nordstrom.com, Rack Stores and NordstromRack.com. It runs from raw data through audited SQL models and statistical testing to a 13-page executive dashboard. All data is synthetic (see [Project_Disclaimer.md](Project_Disclaimer.md)).
 
 **Author:** Daniel Rodriguez III
 **Built for:** Data Analyst 3, Merchandising Customer Insights
@@ -39,7 +39,7 @@ Sample: 49,875 orders from 7,945 customers, January 2025 to September 2026, $16.
 | Looking up a field | [Data_Dictionary.md](Data_Dictionary.md) | As needed |
 | Running the code | Quick start below | 30 minutes |
 
-**Live dashboard:** [Looker Studio report](https://datastudio.google.com/s/tzMKrbXdB4Q) (view only). A PDF export and page screenshots are kept in `docs/` so the work stays visible after the cloud tables expire.
+**Live dashboard:** [Looker Studio report]([ADD-PUBLISHED-LINK-HERE](https://datastudio.google.com/s/uEzg37Iw_ZI)) (view only). A PDF export (`docs/`) and page images (`dashboard_pages_images/`) keep the work visible after the cloud tables expire.
 
 ---
 
@@ -54,7 +54,7 @@ Generate data (Python)  ->  Load to BigQuery  ->  Model with SQL  ->  QA gate  -
 - **Staging** standardizes channel labels, removes duplicates and rejects unusable rows with a stated reason. Every raw row is accounted for: 50,150 raw = 150 duplicates + 125 rejects + 49,875 staged, with zero unexplained.
 - **Modeling** builds one fact table at order grain, plus dimensions and dashboard-ready marts.
 - **Analysis** estimates price response, promotion incrementality, cannibalization, customer segments and anomalies.
-- **Dashboard** shows five pages: Executive overview, Promotion effectiveness, Customer insights, Category and inventory health, Data trust.
+- **Dashboard** tells the story in 13 pages and five sections: where we stand, whether promotions pay, who responds, category and inventory health, and data trust.
 
 ## Repository structure
 
@@ -85,10 +85,10 @@ nordstrom-merchandising-customer-insights/
 │   └── 07_qa_mart_freshness.sql      7 mart freshness tests
 ├── notebooks/
 │   └── AURA_statistical_analysis.ipynb   Colab notebook (report layer)
+├── dashboard_pages_images/           Page1_Executive_Scorecard.png ... Page13_Data_Trust.png
 └── docs/
     ├── Methodology_and_Validation.md
-    ├── AURA_dashboard.pdf
-    └── dashboard_page1.png ... dashboard_page5.png
+    └── AURA_dashboard.pdf
 ```
 
 ## Quick start
