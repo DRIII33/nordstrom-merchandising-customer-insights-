@@ -39,7 +39,7 @@ Sample: 49,875 orders from 7,945 customers, January 2025 to September 2026, $16.
 | Looking up a field | [Data_Dictionary.md](Data_Dictionary.md) | As needed |
 | Running the code | Quick start below | 30 minutes |
 
-**Live dashboard:** [Looker Studio report](ADD-PUBLISHED-LINK-HERE) (view only). A PDF export and page screenshots are kept in `docs/` so the work stays visible after the cloud tables expire.
+**Live dashboard:** [Looker Studio report](https://datastudio.google.com/s/tzMKrbXdB4Q) (view only). A PDF export and page screenshots are kept in `docs/` so the work stays visible after the cloud tables expire.
 
 ---
 
