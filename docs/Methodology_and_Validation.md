@@ -64,7 +64,7 @@ The 45% digital share of revenue is an input to the simulation (channel weights 
 
 ## 5. Dashboard validation
 
-Each of the five dashboard pages was checked tile by tile against values recomputed from the order-level fact table and the analysis tables: 202 expected values covering every number named in the build instructions. Percentages match within 0.06 points, dollar amounts within 1.5% (compact formats), counts exactly.
+Each of the 13 dashboard pages was checked tile by tile against values recomputed from the order-level fact table and the analysis tables: 202 expected values covering every number named in the build instructions. Percentages match within 0.06 points, dollar amounts within 1.5% (compact formats), counts exactly.
 
 ## 6. Limitations
 
@@ -76,7 +76,7 @@ Each of the five dashboard pages was checked tile by tile against values recompu
 - **Rack-channel margin.** The margin effect on Rack channels (-$135 per channel-day) has an interval spanning zero. The case against Clear the Rack rests mainly on the statistically clear cannibalization of Nordstrom.com.
 - **Rule-based RFM ties.** Frequency scores split customers who have the same order count (for example 3 orders or 6 orders) arbitrarily, so a rebuild can move about 10 customers between segments. Adding a `customer_id` tie-breaker to the `NTILE` ordering in `sql/04_customer_metrics.sql` makes the result repeatable.
 - **Observed value only.** Customer value covers 21 months and is not a forecast.
-- **Table expiry.** BigQuery sandbox tables expire after 60 days by default. The PDF export and screenshots in `docs/` preserve the dashboard.
+- **Table expiry.** BigQuery sandbox tables expire after 60 days by default. The PDF export in `docs/` and the page images in `dashboard_pages_images/` preserve the dashboard.
 
 ## 7. Reproducibility
 
