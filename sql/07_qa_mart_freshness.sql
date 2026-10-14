@@ -1,3 +1,5 @@
+-- Run after every rebuild. Every row must show passed = TRUE.
+-- These tests exist because marts built before the fact table was last rebuilt otherwise pass silently.
 WITH checks AS (
   SELECT 'customer_rfm_covers_all_customers' AS test_name,
          CAST((SELECT COUNT(DISTINCT customer_id) FROM `driiiportfolio.merchandising_insights.fct_transactions`) AS STRING) AS expected,
