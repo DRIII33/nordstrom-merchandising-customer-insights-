@@ -1,4 +1,10 @@
 # Executive Summary: Project AURA
+---
+
+**Data Analyst 3:** Daniel Rodriguez III
+
+**Date:** October 14, 2026
+
 
 **Bottom line:** Promotions in this retailer's four channels create traffic and revenue, but most do not create margin. The largest leak is Clear the Rack, which adds $17k of revenue and loses $64k of gross margin once it pulls sales away from Nordstrom.com. A controlled targeting test is the next step.
 
